@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 use App\User;
+use App\Role;
 
 class ProfileController extends Controller
 {
@@ -33,25 +34,30 @@ class ProfileController extends Controller
     }
     public function edit(User $user)
     {
-        $user=Auth::user();
-        return view('profile.edit',['user'=>$user]);
+        $users = Auth::user();
+        //ddd($users);
+        //$users=Auth::user()->id;
+        return view('profile.edit',['user'=>$users]);
     }
 
     public function update(Request $request, User $user){
         
+        
         $validateData=$request->validate([
-            'username' => 'string|unique:users',
-            'email'=>'string|unique:users'
+            'username' => 'string',
+            'email' => 'string'
             
         ]);
-        $validateData['username']=$request->username;
+        //$validateData['username']=$request->username;
         $validateData['email']=$request->email;
         //$users->password=Hash::make($request->password);
-        //$validateData['user_id']=Auth::user()->id;
+        //$validateData['role_id']=Auth::user()->role_id;
      
-        //ddd($validateData);
+        /*ddd($validateData);
+        ddd($user);*/
         $user->update($validateData);
         return redirect('/profile');
+        return back();
     }
 
 }

@@ -72,12 +72,19 @@ Route::get('/','HomeController@index')->name('home');
 Route::resources([
     'posts'=>'PostController',
     'user'=>'UserController',
-    'comments'=>'CommentsController'
+    'comments'=>'CommentsController',
+    'adminpost'=>'AdminpostController'
 ]);
 
 Route::get('/profile','ProfileController@index')->name('profile');
-Route::get('/profile/edit','ProfileController@edit')->name('profile.edit');
+Route::get('/profile/{id}/edit','ProfileController@edit')->name('profile.edit');
 Route::put('/profile/update','ProfileController@update')->name('profile.update');
+
+Route::get('/admin/posts','AdminpostController@index')->name('adminposts.index');;
+Route::put('/post/{id}/edit','AdminpostController@edit')->name('adminposts.edit');
+Route::put('/update','AdminpostController@update')->name('adminposts.update');
+Route::delete('post/{id}', 'AdminpostController@destroy')->name('adminposts.destroy');
+
 
 //Route::put('/updatepassword','ProfileController@index')->name('updatepassword');
 
