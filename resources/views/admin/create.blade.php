@@ -6,7 +6,7 @@
         <div class="col-md-8">
            <div class="card" style="padding: 15px;">
                 <h3> Crear post</h3>
-                <form method="POST" action="{{ route('posts.store') }}">
+                <form method="POST" action="{{ route('adminpost.store') }}">
                     @csrf                    
                     <p>
                         <label for="title" class="form-label">Title</label>
@@ -17,11 +17,10 @@
                         <label for="contents" class="form-label">Contents</label>
                         <input  class="form-control" type="text" name="contents">
                     </p>
-
                     <label>Tag</label><br>
                     <input class="form-control" type="text" name="tags" style="width:50%;"><br>
                         <button type="submit" class="btn btn-info">Crear</button>
-                        <a href="{{ route('home') }}" class="btn btn-danger">Cancelar</a>
+                        <a href="{{ route('adminpost.index') }}" class="btn btn-danger">Cancelar</a>
 
                 </form>
             </div>

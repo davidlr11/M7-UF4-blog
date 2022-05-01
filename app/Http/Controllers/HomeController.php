@@ -25,10 +25,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $user=Auth::user();
-        $posts=$user->posts;
+        //$user=Auth::user();
+        //$posts=$user->posts;
         //ddd($posts);
-        //$posts=Post::all();
+        $posts=Post::all();
         return view('home',compact('posts'));
     }
 }

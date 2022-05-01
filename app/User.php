@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Post;
 use App\Role;
+use App\Tag;
 use App\Comment;
 
 class User extends Authenticatable
@@ -45,6 +46,9 @@ class User extends Authenticatable
     }
     public function comments(){
         return $this->hasMany(Comment::class);
+    }
+    public function tags(){
+        return $this->hasMany(Tag::class);
     }
     public function role(){
         return $this->belongsTo(Role::class);

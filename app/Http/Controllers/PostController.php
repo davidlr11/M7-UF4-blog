@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Auth\Access\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use App\Tag;
 use App\Post;
 use App\User;
 class PostController extends Controller
@@ -14,6 +14,8 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    
+
     public function index()
     {
         /*if($user=Auth::user()){
@@ -22,11 +24,21 @@ class PostController extends Controller
             $posts=Post::all();
         }
         return view('posts',compact('posts'));*/
-        $user=Auth::user();
-        $posts=$user->posts;
+        $posts=Post::all();
+        //ddd($posts);
+        //$user=Auth::user();
+        //$posts=$user->posts;
+
         return view('home',compact('posts'));
     }
+    
+    public function buscador(Request $request)
+    {
 
+        $buscadorInput = $request->get('buscador');
+        $posts = Post::where('title', 'like', "%{$buscadorInput}%")->get();
+        return view('home', compact('posts'));
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -52,20 +64,28 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-       
-       $validateData=$request->validate([
-            'title' => 'string|unique:posts|max:90',
-            'content' => 'string'
+        
+        $user = Auth::user();
+        $post = new Post();
+        $post->title = $request->get('title');
+        $post->contents = $request->get('contents');
+        $post->user_id = $user->id;
+        $post->save();
 
-        ]);
-
-        $validateData['user_id']=Auth::user()->id;
-        //$validateData['category_id']='1';
-        $validateData['contents']=$request->contents;
-
-        Post::create($validateData);
+        if($request->get('tags')!=null){
+            
+            $tags=explode(',', $request->get('tags'));
+            foreach($tags as $tag){
+            $tagpost=Tag::create(['tag'=>$tag]);
+            $post->tags()->attach($tagpost);
+            
+            }
+        } else {
+            return redirect('/');
+        }
         return redirect('/');
 
+        
 
     }
 
@@ -106,8 +126,8 @@ class PostController extends Controller
             'contents' => 'string'
         ]);
         
-        $validateData['contents']=$request->contents;
-        $validateData['user_id']=Auth::user()->id;
+        //$validateData['contents']=$request->contents;
+        //$validateData['user_id']=Auth::user()->id;
         
         
         $post->update($validateData);
@@ -121,9 +141,11 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy($id)
     {
+        $post = Post::find($id);
         $post->delete();
-        return back();
+        return back();    
+
     }
 }

@@ -10,18 +10,18 @@
                  <div class="card-header">{{ __('Editar Perfil') }}</div>
  
                  <div class="card-body">
-                    <form method="POST" action="{{ route('profile.update', $user->id) }}">
+                    <form method="POST" action="{{ route('profile.update', Auth::user()->id) }}">
                         @csrf
                         @method('PUT')
                         
                         <p>
                             <label for="username" class="form-label">Nombre de usuario</label>
-                            <input class="form-control" type="text" name="username" value="{{$user->username}}">
+                            <input class="form-control" type="text" name="username" value="{{Auth::user()->username}}">
                         </p>
                 
                         <p>
                             <label for="email" class="form-label">Correo electrónico</label>
-                            <input  class="form-control" type="text" name="email" value="{{$user->email}}">
+                            <input  class="form-control" type="text" name="email" value="{{Auth::user()->email}}">
                         </p>
                 
                             <button type="submit" class="btn btn-info">Guardar</button>

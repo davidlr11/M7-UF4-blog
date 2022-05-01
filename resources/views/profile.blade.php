@@ -21,6 +21,7 @@
                     </p>
                     <br>
                     <a href="{{route('profile.edit',$users->id)}}" class="btn btn-info">Editar</a>
+                    
                 </div>
             </div>
         </div>

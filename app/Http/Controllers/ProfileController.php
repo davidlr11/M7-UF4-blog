@@ -34,6 +34,7 @@ class ProfileController extends Controller
     }
     public function edit(User $user)
     {
+        //ddd($user);
         $users = Auth::user();
         //ddd($users);
         //$users=Auth::user()->id;
@@ -42,22 +43,22 @@ class ProfileController extends Controller
 
     public function update(Request $request, User $user){
         
-        
         $validateData=$request->validate([
             'username' => 'string',
             'email' => 'string'
             
         ]);
         //$validateData['username']=$request->username;
-        $validateData['email']=$request->email;
+        //$validateData['email']=$request->email;
         //$users->password=Hash::make($request->password);
         //$validateData['role_id']=Auth::user()->role_id;
      
         /*ddd($validateData);
         ddd($user);*/
+
         $user->update($validateData);
+        //return redirect('/profile');
         return redirect('/profile');
-        return back();
     }
 
 }

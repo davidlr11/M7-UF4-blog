@@ -33,18 +33,5 @@ class UserSeeder extends Seeder
         $user->role_id=Role::where('role','admin')->first()->id;
         $user->save();
 
-        $user=new User;
-        $user->username='loader';
-        $user->email='loader@gmail.com';
-        $user->password=Hash::make('123456');
-        $user->role_id=Role::where('role','loader')->first()->id;
-        $user->save();
-
-        $user=new User;
-        $user->username='guest';
-        $user->email='guest@gmail.com';
-        $user->password=Hash::make('123456');
-        $user->role_id=Role::where('role','guest')->first()->id;
-        $user->save();
     }
 }

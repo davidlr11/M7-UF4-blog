@@ -1,24 +1,21 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Auth\Access\Response;
+
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-use App\Post;
-use App\User;
-use App\Comment;
-
-class CommentController extends Controller
+class SearchController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Post $post)
+    public function buscador(Request $request)
     {
-        return view('comment',['post'=>$post]);
+        $buscadorInput = $request->get('buscador');
+        $posts = Post::where('title', 'like', "%{$buscadorInput}%")->get();
+        return view('search', compact('posts'));
     }
 
     /**
@@ -39,21 +36,9 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        
-        //$post_id = $request->get($post->id);
-        //var_dump($request->get());
-        $validateData=$request->validate([
-            'comment' => 'string'
-        ]);
-        $validateData['post_id']=$request->get('idpost');
-        $validateData['user_id']=Auth::user()->id;
-        //$validateData['category_id']='1';
-        //$validateData['contents']=$request->contents;
-
-        Comment::create($validateData);
-        return back();
+        //
     }
-    
+
     /**
      * Display the specified resource.
      *
@@ -96,8 +81,6 @@ class CommentController extends Controller
      */
     public function destroy($id)
     {
-        $comment = Comment::find($id);
-        $comment->delete();
-        return back();
+        //
     }
 }

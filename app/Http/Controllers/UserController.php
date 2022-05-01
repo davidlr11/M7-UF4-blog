@@ -18,8 +18,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        /*$users = User::all();
-        //return view('users.index')->with('users',$users);*/
+        $users=User::all();
+        return view('users.index',compact('users'));
     }
 
     /**
@@ -29,7 +29,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('users.create');
     }
 
     /**
@@ -99,6 +99,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::find($id);
+        $user->delete();
+        return back();
     }
 }
