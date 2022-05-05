@@ -60,5 +60,37 @@ class ProfileController extends Controller
         //return redirect('/profile');
         return redirect('/profile');
     }
+    public function changePassword(){
+        $users=Auth::user();
+        return view('profile.changePassword')->with('users',$users);
+    }
+    public function changePasswordUpdate(Request $request){
+        if(empty($request->get('passwordactual'))==false && empty($request->get('newpassword'))==false && empty($request->get('newpassword2'))==false){
+            if(strlen($request->get('passwordactual')) >=6 && strlen($request->get('newpassword')) >=6 && strlen($request->get('newpassword2')) >=6){
+                if($request->get('newpassword')==$request->get('newpassword2')){
+                    if (Hash::check($request->get('passwordactual'), Auth::user()->password)){
+                        $passwordUpdate=$request->get('newpassword');
+                        User::whereId(Auth::user()->id)->update([
+                            'password' => Hash::make($passwordUpdate)
+                        ]);
+                        
+                        return redirect('/profile'); 
+                    } else  {
+                        return redirect(404); 
+                    }     
+                } else {
+                    return redirect(404);
+                }
+            } else {
+                return redirect(404);
+            }
+            
+        } else {
+            return redirect(404);
+        }
+        
 
+        
+    }
+    
 }

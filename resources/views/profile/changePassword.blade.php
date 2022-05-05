@@ -7,21 +7,25 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                 <div class="card-header">{{ __('Editar Perfil') }}</div>
+                 <div class="card-header">{{ __('Editar Contraseña') }}</div>
  
                  <div class="card-body">
-                    <form method="POST" action="{{ route('profile.update', Auth::user()->id) }}">
+                    <form method="POST" action="{{ route('profile.changePasswordUpdate', Auth::user()->id) }}">
                         @csrf
                         @method('PUT')
                         
                         <p>
-                            <label for="username" class="form-label">Nombre de usuario</label>
-                            <input class="form-control" type="text" name="username" value="{{Auth::user()->username}}">
+                            <label for="passwordactual" class="form-label">Contraseña actual:</label>
+                            <input class="form-control" type="password" name="passwordactual">
                         </p>
                 
                         <p>
-                            <label for="email" class="form-label">Correo electrónico</label>
-                            <input  class="form-control" type="text" name="email" value="{{Auth::user()->email}}">
+                            <label for="newpassword" class="form-label">Nueva contraseña:</label>
+                            <input  class="form-control" type="password" name="newpassword">
+                        </p>
+                        <p>
+                            <label for="newpassword2" class="form-label">Confirma la nueva contraseña:</label>
+                            <input  class="form-control" type="password" name="newpassword2">
                         </p>
                             <button type="submit" class="btn btn-info">Guardar</button>
                             <a href="{{ route('profile') }}" class="btn btn-danger">Cancelar</a>

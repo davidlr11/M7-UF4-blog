@@ -40,7 +40,14 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        User::create([
+            'username' => $request['username'],
+            'email' => $request['email'],
+            'password' => Hash::make($request['password']),
+            'role_id'=>2
+        ]);
+
+        return redirect('/admin/users');
     }
 
     /**
@@ -60,9 +67,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        //
+        return view('users.edit',['user'=>$user]);
     }
 
     /**
@@ -82,13 +89,12 @@ class UserController extends Controller
         ]);
         
         $validateData['email']=$request->email;
-        $validateData['password']=Hash::make($request->password);
-
-        $validateData['user_id']=Auth::user()->id;
+        //$validateData['password']=Hash::make($request->password);
+        $validateData['user_id']=$user->id;
         
         
         $user->update($validateData);
-        return redirect('/');
+        return redirect('/admin/users');
     }
 
     /**

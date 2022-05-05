@@ -25,7 +25,7 @@
                     
                         <?php 
                             if(Auth::user()->username==$usuario->username){
-                                echo"Creado por ti | ";
+                                echo"Creado por ti | Hace&nbsp";
                             } else {
                                 echo"Creado por ".$usuario->username." | Hace &nbsp";
                             }
@@ -34,7 +34,7 @@
                     
 
                     @if($diff_date->format('%d') == '0' && $diff_date->format(intval('%h') == '0' && $diff_date->format('%i') == '0'))
-                    <p> {{$diff_date->format('%s segundos')}}</p>
+                    <p> {{$diff_date->format(' %s segundos')}}</p>
 
                     @elseif($diff_date->format('%d') == '0' && $diff_date->format(intval('%h')) == '0')
                     <p> {{$diff_date->format('%i minutos')}}</p>

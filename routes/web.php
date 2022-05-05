@@ -113,12 +113,11 @@ Route::get('/admin/users','UserController@index')->name('users.index');
 Route::get('/admin/users/create', 'UserController@create')->name('users.create');
 Route::post('/admin/users', 'UserController@store')->name('users.store');
 Route::get('/admin/users/{user}/edit','UserController@edit')->name('users.edit');
-Route::put('/admin/update/{user}','UserController@update')->name('users.update');
+Route::put('/admin//users/update/{user}','UserController@update')->name('users.update');
 Route::delete('/admin/users/{id}', 'UserController@destroy')->name('users.destroy');
 
 
-//Route::put('/updatepassword','ProfileController@index')->name('updatepassword');
+Route::get('/profile/changepassword/user/{user}','ProfileController@changePassword')->name('profile.changePassword');
 //Route::get('/admin','ProfileController@index')->name('admin')->middleware(['auth','role:admin']);
-
+Route::put('/profile/changepassword/update/user/{user}','ProfileController@changePasswordUpdate')->name('profile.changePasswordUpdate');
 Auth::routes();
-

@@ -9,13 +9,17 @@
                 <form method="POST" action="{{ route('users.store') }}">
                     @csrf                    
                     <p>
-                        <label for="title" class="form-label">Username</label>
+                        <label for="username" class="form-label">Nombre de usuario</label>
                         <input class="form-control" type="text" name="username">
                     </p>
 
                     <p>
-                        <label for="contents" class="form-label">Email</label>
+                        <label for="email" class="form-label">Correo electrónico</label>
                         <input  class="form-control" type="text" name="email">
+                    </p>
+                    <p>
+                        <label for="password" class="form-label">Contraseña</label>
+                        <input  class="form-control" type="password" name="password">
                     </p>
                     <br>
                         <button type="submit" class="btn btn-info">Crear</button>

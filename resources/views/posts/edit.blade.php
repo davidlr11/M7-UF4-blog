@@ -19,6 +19,8 @@
                         <label for="contents" class="form-label">Contents</label>
                         <input  class="form-control" type="text" name="contents" value="{{$post->contents}}">
                     </p>
+
+                    
                         <button type="submit" class="btn btn-info">Guardar</button>
                         <a href="{{ route('home', $post->id) }}" class="btn btn-danger">Cancelar</a>
 

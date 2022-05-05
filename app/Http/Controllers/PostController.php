@@ -37,8 +37,13 @@ class PostController extends Controller
 
         $buscadorInput = $request->get('buscador');
         $posts = Post::where('title', 'like', "%{$buscadorInput}%")->get();
+        $posts = Post::where('contents', 'like', "%{$buscadorInput}%")->get();
+        if($buscadorInput!=$posts){
+            return redirect(404);
+        }
         return view('home', compact('posts'));
     }
+    
     /**
      * Show the form for creating a new resource.
      *
@@ -148,4 +153,6 @@ class PostController extends Controller
         return back();    
 
     }
+
+    
 }
