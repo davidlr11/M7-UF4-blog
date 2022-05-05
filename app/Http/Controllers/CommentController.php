@@ -40,15 +40,11 @@ class CommentController extends Controller
     public function store(Request $request)
     {
         
-        //$post_id = $request->get($post->id);
-        //var_dump($request->get());
         $validateData=$request->validate([
             'comment' => 'string'
         ]);
         $validateData['post_id']=$request->get('idpost');
         $validateData['user_id']=Auth::user()->id;
-        //$validateData['category_id']='1';
-        //$validateData['contents']=$request->contents;
 
         Comment::create($validateData);
         return back();

@@ -106,11 +106,7 @@ class AdminpostController extends Controller
             'title' => 'string|unique:posts|max:90',
             'contents' => 'string'
         ]);
-        /*$validateData['title']=$request->title;
-        $validateData['contents']=$request->contents;*/
-        //$validateData['user_id']=Auth::user()->id;
-        
-        
+       
         $post->update($validateData);
         return redirect('/admin/posts');
 

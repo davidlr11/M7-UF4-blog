@@ -34,10 +34,7 @@ class ProfileController extends Controller
     }
     public function edit(User $user)
     {
-        //ddd($user);
         $users = Auth::user();
-        //ddd($users);
-        //$users=Auth::user()->id;
         return view('profile.edit',['user'=>$users]);
     }
 

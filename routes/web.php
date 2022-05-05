@@ -16,54 +16,8 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-/*Route::get('/', function () {
-    return view('welcome');
-});*/
-
-
 //Rutes principals
 
-
-//Route::get('/',[IndexController::class,'index'])->name('index');
-//Route::get('/',[HomeController::class,'index'])->name('home');
-
-/*Route::middleware(['auth','role:admin'])->prefix('admin')->group(function(){
-    Route::get('/',function(){
-        return "admin.......users.";
-
-    })->name('admin.users');
-
-    //administración, backend users, backend posts
-    //Route::get()----
-
-});*/
-
-
-//Route::view('/','home',['posts'=>['title'=>'Hola','contents'=>'Lorem']]);
-/*Route::get('posts/{post?}',function(Post $post){
-    if($post==null){
-        return Post::all();
-    }
-    $post=Post::findOrFail($post);
-    return $post;
-
-})->where('post','[0-9]+');*/
-/*->middleware(['auth'])*/;
-
-/*Route::get('posts/{post?}',function(Post $post){
-    return $post;
-
-});*/
-/*->middleware(['auth'])*/;
-
-/*Route::resources([
-    'posts'=>'PostController',
-    'users'=>'UserController',
-    'comments'=>'CommentController'
-]);*/
-//Route::get('/home','HomeController@index')->name('home');
-/*Route::get('/','HomeController@index')->name('home');
-Auth::routes();*/
 
 //rutas nuevas
 
@@ -78,7 +32,7 @@ Route::resources([
 //PROFILE
 Route::get('/profile','ProfileController@index')->name('profile');
 Route::get('/profile/{id}/edit','ProfileController@edit')->name('profile.edit');
-Route::put('/rofile/update/{user}','ProfileController@update')->name('profile.update');
+Route::put('/profile/update/{user}','ProfileController@update')->name('profile.update');
 
 //POSTS
 Route::get('/posts','PostController@index')->name('posts.index');
@@ -116,8 +70,8 @@ Route::get('/admin/users/{user}/edit','UserController@edit')->name('users.edit')
 Route::put('/admin//users/update/{user}','UserController@update')->name('users.update');
 Route::delete('/admin/users/{id}', 'UserController@destroy')->name('users.destroy');
 
-
+//Cambio de contraseña
 Route::get('/profile/changepassword/user/{user}','ProfileController@changePassword')->name('profile.changePassword');
-//Route::get('/admin','ProfileController@index')->name('admin')->middleware(['auth','role:admin']);
 Route::put('/profile/changepassword/update/user/{user}','ProfileController@changePasswordUpdate')->name('profile.changePasswordUpdate');
+
 Auth::routes();

@@ -131,9 +131,6 @@ class PostController extends Controller
             'contents' => 'string'
         ]);
         
-        //$validateData['contents']=$request->contents;
-        //$validateData['user_id']=Auth::user()->id;
-        
         
         $post->update($validateData);
         return redirect('/');
